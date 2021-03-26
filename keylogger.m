@@ -57,12 +57,8 @@ NSMutableString* extractKeyModifiers(CGEventRef event)
 }
 
 //callback for mouse/keyboard events
-// ->for now, just format, then print the event to stdout
 CGEventRef eventCallback(CGEventTapProxy proxy, CGEventType type, CGEventRef event, void *refcon)
 {
-    //(mouse) location
-    CGPoint location = {0};
-    
     //(key) code
     CGKeyCode keyCode = 0;
 
@@ -71,52 +67,33 @@ CGEventRef eventCallback(CGEventTapProxy proxy, CGEventType type, CGEventRef eve
     
     //key modify(ers)
     NSMutableString* keyModifiers = nil;
-    
-    //what type?
-    // ->pretty print
+
     switch(type)
     {
-        //key down
-        case kCGEventKeyDown:
-            
-            //get key modifiers
-            keyModifiers = extractKeyModifiers(event);
-            
-            break;
-            
         //key up
         case kCGEventKeyUp:
+            keyModifiers = extractKeyModifiers(event);
             break;
         
         // event tap timeout
         case kCGEventTapDisabledByTimeout:
             CGEventTapEnable(eventTap, true);
-            printf("Event tap timed out: restarting tap");
             return event;
         
+        // other events such as KeyDown
         default:
-            printf("unknown (%d)\n", type);
+            return event;
     }
     
-    if( kCGEventKeyDown == type )
-    {
-        keyCode = (CGKeyCode)CGEventGetIntegerValueField(event, kCGKeyboardEventKeycode);
-        keyCodeString = stringFromKeyCode(keyCode);
+    keyCode = (CGKeyCode)CGEventGetIntegerValueField(event, kCGKeyboardEventKeycode);
+    keyCodeString = stringFromKeyCode(keyCode);
 
-        // for csv output we need to escape the delimiter "," to "\,"
-        if ([keyCodeString isEqualToString:@","]) {
-            keyCodeString = @"\\,";
-        }
-
-        printf("%s,", [keyCodeString UTF8String]);
-
-        if(0 != keyModifiers.length)
-        {
-            printf("%s", keyModifiers.UTF8String);
-        } 
-        
-        printf("\n");
+    // for csv output we need to escape the delimiter
+    if ([keyCodeString isEqualToString:@","]) {
+        keyCodeString = @"\\,";
     }
+
+    printf("%s,%s\n", keyCodeString.UTF8String, keyModifiers.UTF8String);
     
     return event;
 }
