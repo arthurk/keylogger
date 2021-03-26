@@ -37,7 +37,7 @@ Then press `Shift+F` to get the histogram:
 
 ## Keyboard Layout Analyzer
 
-The repo comes with a Python script that can parse the csv file and generate output for the [keyboard layout analyzer](https://patorjk.com/keyboard-layout-analyzer/). This will give you recommendations about the best keyboard layout, finger usage and generate a heatmap:
+The repo comes with a Python script that can parse the csv file and generate output for the [keyboard layout analyzer](https://patorjk.com/keyboard-layout-analyzer/). It will give you recommendations about the best keyboard layout, finger usage and generate a heatmap:
 
 ![heatmap](/kla-heatmap.png?raw=true)
 
@@ -68,7 +68,7 @@ sudo ./keylogger
 
 # or
 
-echo "key,mod" > testrun-3.csv
+echo "key,mod" > keylog.csv
 sudo ./keylogger >> keylog.csv
 ```
 
