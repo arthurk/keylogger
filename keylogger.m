@@ -90,7 +90,7 @@ CGEventRef eventCallback(CGEventTapProxy proxy, CGEventType type, CGEventRef eve
 
     // for csv output we need to escape the delimiter
     if ([keyCodeString isEqualToString:@","]) {
-        keyCodeString = @"\\,";
+        keyCodeString = @"\",\"";
     }
 
     printf("%s,%s\n", keyCodeString.UTF8String, keyModifiers.UTF8String);
