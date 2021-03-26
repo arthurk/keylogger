@@ -70,6 +70,9 @@ CGEventRef eventCallback(CGEventTapProxy proxy, CGEventType type, CGEventRef eve
     
     //(key) code
     CGKeyCode keyCode = 0;
+
+    // key code as string
+    NSString *keyCodeString = @"";
     
     //key modify(ers)
     NSMutableString* keyModifiers = nil;
@@ -100,13 +103,17 @@ CGEventRef eventCallback(CGEventTapProxy proxy, CGEventType type, CGEventRef eve
             printf("unknown (%d)\n", type);
     }
     
-    //for key presses
-    // ->dump extra info
     if( kCGEventKeyDown == type )
     {
         keyCode = (CGKeyCode)CGEventGetIntegerValueField(event, kCGKeyboardEventKeycode);
+        keyCodeString = stringFromKeyCode(keyCode);
 
-        printf("%s,", [stringFromKeyCode(keyCode) UTF8String]);
+        // for csv output we need to escape the delimiter "," to "\,"
+        if ([keyCodeString isEqualToString:@","]) {
+            keyCodeString = @"\\,";
+        }
+
+        printf("%s,", [keyCodeString UTF8String]);
 
         if(0 != keyModifiers.length)
         {
