@@ -26,36 +26,37 @@ NSMutableString* extractKeyModifiers(CGEventRef event)
     //control
     if(YES == !!(flags & kCGEventFlagMaskControl))
     {
-        //add
         [keyModifiers appendString:@"control "];
     }
     
-    //alt
+    //alt or option key
     if(YES == !!(flags & kCGEventFlagMaskAlternate))
     {
-        //add
         [keyModifiers appendString:@"alt "];
     }
     
     //command
     if(YES == !!(flags & kCGEventFlagMaskCommand))
     {
-        //add
         [keyModifiers appendString:@"command "];
     }
     
     //shift
     if(YES == !!(flags & kCGEventFlagMaskShift))
     {
-        //add
         [keyModifiers appendString:@"shift "];
     }
     
     //caps lock
     if(YES == !!(flags & kCGEventFlagMaskAlphaShift))
     {
-        //add
         [keyModifiers appendString:@"caps lock "];
+    }
+
+    // Fn
+    if(YES == !!(flags & kCGEventFlagMaskSecondaryFn))
+    {
+        [keyModifiers appendString:@"fn "];
     }
     
     return keyModifiers;
