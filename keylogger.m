@@ -53,12 +53,6 @@ NSMutableString* extractKeyModifiers(CGEventRef event)
         [keyModifiers appendString:@"caps lock "];
     }
 
-    // Fn
-    if(YES == !!(flags & kCGEventFlagMaskSecondaryFn))
-    {
-        [keyModifiers appendString:@"fn "];
-    }
-    
     return keyModifiers;
 }
 
