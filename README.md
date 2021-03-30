@@ -37,7 +37,7 @@ Then press `Shift+F` to get the histogram:
 
 ## Keyboard Layout Analyzer
 
-The repo comes with a Python script that can parse the csv file and generate output for the [keyboard layout analyzer](https://patorjk.com/keyboard-layout-analyzer/). It will give you recommendations about the best keyboard layout, finger usage and generate a heatmap:
+The repo comes with a Python script that can parse the generated csv file and format the output for the [keyboard layout analyzer](https://stevep99.github.io/keyboard-layout-analyzer/). KLA will give you recommendations about the best keyboard layout based on how much finger moved and other factors. It can also generate a heatmap:
 
 ![heatmap](/kla-heatmap.png?raw=true)
 
@@ -47,7 +47,7 @@ Run the Python script and copy the output to your clipboard:
 python3 kla_text_input.py keylog.csv | pbcopy
 ```
 
-Then go to [keyboard layout analyzer](https://patorjk.com/keyboard-layout-analyzer/) and paste the text into the textbox and click "See which layout is the best".
+Then go to [keyboard layout analyzer](https://stevep99.github.io/keyboard-layout-analyzer/) and paste the text into the textbox and click "See which layout is the best".
 
 Note that the keyboard layout analyzer doesn't support virtual keys such as Shift/Cmd/Ctrl/Delete/Arrow-keys so they are excluded from the statistics.
 
@@ -61,12 +61,12 @@ You can compile it with:
 clang -o keylogger keylogger.m -framework Cocoa -framework Carbon
 ```
 
-Then launch with:
+Then launch it with:
 
 ```
 sudo ./keylogger
 
-# or
+# or if you wish to output the contents to a file
 
 echo "key,mod" > keylog.csv
 sudo ./keylogger >> keylog.csv
