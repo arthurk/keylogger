@@ -1,6 +1,8 @@
 A keylogger for macOS.
 
-Keys are logged in CSV format to stdout. The first column is the key and the second column is the modifier that was pressed:
+## Data Format
+
+Keys are logged in CSV format to stdout. The first column is the key pressed. The second column is the modifier that was held while pressing the key:
 
 ```
 UP_ARROW,
@@ -15,13 +17,7 @@ ESC,
 c,control
 ```
 
-For example `c,control` means that Ctrl+C was pressed.
-
-To save the output you can redirect it to a file:
-
-```
-sudo ./keylogger >> keylog.csv 
-```
+For example `c,control` means that Ctrl+C was pressed. If no modified was pressed, the second column is empty (`a,`).
 
 ## Histogram in Visidata
 
@@ -61,13 +57,17 @@ You can compile it with:
 clang -o keylogger keylogger.m -framework Cocoa -framework Carbon
 ```
 
-Then launch it with:
+## Usage
+
+The keylogger has to be run as root, otherwise macOS will not allow capturing of the keyboard. To print the logged keys to stdout run:
 
 ```
 sudo ./keylogger
+```
 
-# or if you wish to output the contents to a file
+if you want to output the contents to a file:
 
+```
 echo "key,mod" > keylog.csv
 sudo ./keylogger >> keylog.csv
 ```
