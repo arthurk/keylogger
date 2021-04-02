@@ -116,14 +116,6 @@ int main(int argc, const char * argv[])
     //pool
     @autoreleasepool
     {
-        // unless this program has been added to 'Security & Privacy' -> 'Accessibility'
-        if(0 != geteuid())
-        {
-            //err msg/bail
-            printf("ERROR: run as root\n\n");
-            goto bail;
-        }
-        
         // ->just sniff keyboard
         eventMask = CGEventMaskBit(kCGEventKeyDown) | CGEventMaskBit(kCGEventKeyUp);
             

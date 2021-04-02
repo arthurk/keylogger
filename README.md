@@ -57,19 +57,25 @@ You can compile it with:
 clang -o keylogger keylogger.m -framework Cocoa -framework Carbon
 ```
 
+Next we need to allow the keylogger to capture keyboard input. To do this we have to open `System Preferences -> Security and Privacy -> Accessibility` and add the `keylogger` binary to the list. Also make sure that your terminal app is in that list and allowed to capture input:
+
+![capture-keyboard](/prefs-capture-keyboard.png?raw=true)
+
 ## Usage
 
-The keylogger has to be run as root, otherwise macOS will not allow capturing of the keyboard. To print the logged keys to stdout run:
+To print the logged keys to stdout run:
 
 ```
-sudo ./keylogger
+./keylogger
 ```
 
-if you want to output the contents to a file:
+If you see an error `ERROR: failed to create event tap` then you need to allow your computer to capture keyboard input (see `Installation` above).
+
+If you want to output the contents to a file:
 
 ```
 echo "key,mod" > keylog.csv
-sudo ./keylogger >> keylog.csv
+./keylogger >> keylog.csv
 ```
 
 Code is taken from [sniffMK](https://github.com/objective-see/sniffMK/blob/master/sniffMK/sniffMK.m) and [NESEmulator](https://github.com/fredyshox/NESEmulator/blob/de0c574091a9c1f7e7713ea22f30dd0dd49b8dfb/Client/Cocoa/Sources/KeyCodeFormatter.m).
