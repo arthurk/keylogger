@@ -1,5 +1,9 @@
 A keylogger for macOS.
 
+I wrote this keylogger to analyze which keys are pressed the most. Below you'll find instructions on how to run the code and analyze the data.
+
+**Note**: This keylogger will capture all keyboard input, including passwords and other sensitive information. Make sure to stop the keylogger before entering such data.
+
 ## Data Format
 
 Keys are logged in CSV format to stdout. The first column is the key pressed. The second column is the modifier that was held while pressing the key:
@@ -44,6 +48,8 @@ python3 kla_text_input.py keylog.csv | pbcopy
 ```
 
 Then go to [keyboard layout analyzer](https://stevep99.github.io/keyboard-layout-analyzer/) and paste the text into the textbox and click "See which layout is the best".
+
+The keyboard analyzer runs in client-side javascript, however to be sure that no senvitive information is leaked I recommend to install and run it locally. Instructions can be found in [the github repo](https://github.com/patorjk/keyboard-layout-analyzer#how-to-install).
 
 Note that the keyboard layout analyzer doesn't support virtual keys such as Shift/Cmd/Ctrl/Delete/Arrow-keys so they are excluded from the statistics.
 
