@@ -49,7 +49,7 @@ python3 kla_text_input.py keylog.csv | pbcopy
 
 Then go to [keyboard layout analyzer](https://stevep99.github.io/keyboard-layout-analyzer/) and paste the text into the textbox and click "See which layout is the best".
 
-The keyboard analyzer runs in client-side javascript, however to be sure that no senvitive information is leaked I recommend to install and run it locally. Instructions can be found in [the github repo](https://github.com/patorjk/keyboard-layout-analyzer#how-to-install).
+The keyboard analyzer runs in client-side javascript, however to be sure that no senvitive information is leaked I recommend to disable your internet connection before submitting the text, or run it locally. Instructions can be found in [the github repo](https://github.com/patorjk/keyboard-layout-analyzer#how-to-install).
 
 Note that the keyboard layout analyzer doesn't support virtual keys such as Shift/Cmd/Ctrl/Delete/Arrow-keys so they are excluded from the statistics.
 
